@@ -1,0 +1,66 @@
+@startuml
+
+title: GameQandA Class Diagram
+
+class Game {
+    name: string
+    gameType: GameType
+    createdDate: Date
+}
+
+enum GameType {
+    Action
+    Arcade
+    ...
+}
+
+Game +-- GameType
+Game "1" *-- "*" Question
+
+class Question {
+    questionText: string
+    createdDate: Date
+}
+
+Question "1" *-- "*" Answer
+
+class Answer {
+    answerText: string
+    createdDate: Date
+}
+
+Answer "1" *-- "*" Vote
+
+class Vote {
+    voteStatus: VoteStatus
+    createdDate: Date
+}
+
+enum VoteStatus {
+    Up
+    Down
+    None
+}
+
+Vote +-- VoteStatus
+
+class User {
+    username: string
+    email: string
+    password: string
+    createdDate: Date
+    userStatus: UserStatus
+}
+
+enum UserStatus {
+    Active
+    Inactive
+    Deleted
+}
+
+User +-- UserStatus
+User "1" *-- "*" Question
+User "1" *-- "*" Answer
+User "1" *-- "*" Vote
+
+@enduml
